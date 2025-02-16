@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Stack from '@mui/material/Stack';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
@@ -45,51 +45,53 @@ const data2 = [
 ];
 
 const data3 = [
-  { id: 0, value: 5, label: 'Bitter', color: '#A6321B', parent: 'Angry' },
-  { id: 1, value: 5, label: 'Critical', color: '#A6321B', parent: 'Angry' },
-  { id: 2, value: 5, label: 'Frustrated', color: '#A6321B', parent: 'Angry' },
-  { id: 3, value: 5, label: 'Mad', color: '#A6321B', parent: 'Angry' },
-  { id: 4, value: 5, label: 'Bitter', color: '#A6321B', parent: 'Angry' },
-  { id: 5, value: 5, label: 'Critical', color: '#A6321B', parent: 'Angry' },
-  { id: 6, value: 5, label: 'Frustrated', color: '#A6321B', parent: 'Angry' },
-  { id: 7, value: 5, label: 'Mad', color: '#A6321B', parent: 'Angry' },
-  { id: 8, value: 40/7, label: 'Lonely', color: '#1F5D8A', parent: 'Sad' },
-  { id: 9, value: 40/7, label: 'Vulnerable', color: '#1F5D8A', parent: 'Sad' },
-  { id: 10, value: 40/7, label: 'Guilt', color: '#1F5D8A', parent: 'Sad' },
-  { id: 11, value: 40/7, label: 'Depressed', color: '#1F5D8A', parent: 'Sad' },
-  { id: 12, value: 40/7, label: 'Lonely', color: '#1F5D8A', parent: 'Sad' },
-  { id: 13, value: 40/7, label: 'Vulnerable', color: '#1F5D8A', parent: 'Sad' },
-  { id: 14, value: 40/7, label: 'Guilt', color: '#1F5D8A', parent: 'Sad' },
-  { id: 15, value: 5, label: 'Playful', color: '#9E810A', parent: 'Happy' },
-  { id: 16, value: 5, label: 'Content', color: '#9E810A', parent: 'Happy' },
-  { id: 17, value: 5, label: 'Proud', color: '#9E810A', parent: 'Happy' },
-  { id: 18, value: 5, label: 'Powerful', color: '#9E810A', parent: 'Happy' },
-  { id: 19, value: 5, label: 'Playful', color: '#9E810A', parent: 'Happy' },
-  { id: 20, value: 5, label: 'Content', color: '#9E810A', parent: 'Happy' },
-  { id: 21, value: 5, label: 'Proud', color: '#9E810A', parent: 'Happy' },
-  { id: 22, value: 5, label: 'Powerful', color: '#9E810A', parent: 'Happy' },
-  { id: 23, value: 5, label: 'Peaceful', color: '#9E810A', parent: 'Happy' },
-  { id: 24, value: 5, label: 'Trusting', color: '#9E810A', parent: 'Happy' },
-  { id: 25, value: 5, label: 'Accepted', color: '#9E810A', parent: 'Happy' },
-  { id: 26, value: 5, label: 'Optimistic', color: '#9E810A', parent: 'Happy' },
-  { id: 27, value: 40/7, label: 'Startled', color: '#10715F', parent: 'Surprise' },
-  { id: 28, value: 40/7, label: 'Confused', color: '#10715F', parent: 'Surprise' },
-  { id: 29, value: 40/7, label: 'Amazed', color: '#10715F', parent: 'Surprise' },
-  { id: 30, value: 40/7, label: 'Excited', color: '#10715F', parent: 'Surprise' },
-  { id: 31, value: 40/7, label: 'Startled', color: '#10715F', parent: 'Surprise' },
-  { id: 32, value: 40/7, label: 'Confused', color: '#10715F', parent: 'Surprise' },
-  { id: 33, value: 40/7, label: 'Amazed', color: '#10715F', parent: 'Surprise' },
-  { id: 34, value: 8, label: 'Scared', color: '#5F3374', parent: 'Fear' },
-  { id: 35, value: 8, label: 'Scared', color: '#5F3374', parent: 'Fear' },
-  { id: 36, value: 8, label: 'Anxious', color: '#5F3374', parent: 'Fear' },
-  { id: 37, value: 8, label: 'Rejected', color: '#5F3374', parent: 'Fear' },
-  { id: 38, value: 8, label: 'Insecure', color: '#5F3374', parent: 'Fear' },
-  { id: 39, value: 8, label: 'Bored', color: '#8F5417', parent: 'Bad' },
-  { id: 40, value: 8, label: 'Awful', color: '#8F5417', parent: 'Bad' },
-  { id: 41, value: 8, label: 'Disappointed', color: '#8F5417', parent: 'Bad' },
-  { id: 42, value: 8, label: 'Repelled', color: '#8F5417', parent: 'Bad' },
-  { id: 43, value: 8, label: 'Repelled', color: '#8F5417', parent: 'Bad' }
+  { id: 0, value: 5, label: 'Disrespected', color: '#A6321B', parent: 'Angry' },
+  { id: 1, value: 5, label: 'Betrayed', color: '#A6321B', parent: 'Angry' },
+  { id: 2, value: 5, label: 'Distant', color: '#A6321B', parent: 'Angry' },
+  { id: 3, value: 5, label: 'Numb', color: '#A6321B', parent: 'Angry' },
+  { id: 4, value: 5, label: 'Hostile', color: '#A6321B', parent: 'Angry' },
+  { id: 5, value: 5, label: 'Jealous', color: '#A6321B', parent: 'Angry' },
+  { id: 6, value: 5, label: 'Sceptical', color: '#A6321B', parent: 'Angry' },
+  { id: 7, value: 5, label: 'Furious', color: '#A6321B', parent: 'Angry' },
+  { id: 8, value: 40/7, label: 'Abandoned', color: '#1F5D8A', parent: 'Sad' },
+  { id: 9, value: 40/7, label: 'Fragile', color: '#1F5D8A', parent: 'Sad' },
+  { id: 10, value: 40/7, label: 'Grief', color: '#1F5D8A', parent: 'Sad' },
+  { id: 11, value: 40/7, label: 'Shame', color: '#1F5D8A', parent: 'Sad' },
+  { id: 12, value: 40/7, label: 'Powerless', color: '#1F5D8A', parent: 'Sad' },
+  { id: 13, value: 40/7, label: 'Empty', color: '#1F5D8A', parent: 'Sad' },
+  { id: 14, value: 40/7, label: 'Hurt', color: '#1F5D8A', parent: 'Sad' },
+  { id: 15, value: 5, label: 'Free', color: '#9E810A', parent: 'Happy' },
+  { id: 16, value: 5, label: 'Joyful', color: '#9E810A', parent: 'Happy' },
+  { id: 17, value: 5, label: 'Curious', color: '#9E810A', parent: 'Happy' },
+  { id: 18, value: 5, label: 'Confident', color: '#9E810A', parent: 'Happy' },
+  { id: 19, value: 5, label: 'Valued', color: '#9E810A', parent: 'Happy' },
+  { id: 20, value: 5, label: 'Loving', color: '#9E810A', parent: 'Happy' },
+  { id: 21, value: 5, label: 'Thankful', color: '#9E810A', parent: 'Happy' },
+  { id: 22, value: 5, label: 'Hopeful', color: '#9E810A', parent: 'Happy' },
+  { id: 23, value: 5, label: 'Inspired', color: '#9E810A', parent: 'Happy' },
+  { id: 24, value: 5, label: 'Creative', color: '#9E810A', parent: 'Happy' },
+  { id: 25, value: 5, label: 'Intimate', color: '#9E810A', parent: 'Happy' },
+  { id: 26, value: 5, label: 'Cheeky', color: '#9E810A', parent: 'Happy' },
+  { id: 27, value: 40/7, label: 'Shocked', color: '#10715F', parent: 'Surprise' },
+  { id: 28, value: 40/7, label: 'Dismayed', color: '#10715F', parent: 'Surprise' },
+  { id: 29, value: 40/7, label: 'Energized', color: '#10715F', parent: 'Surprise' },
+  { id: 30, value: 40/7, label: 'Awe', color: '#10715F', parent: 'Surprise' },
+  { id: 31, value: 40/7, label: 'Eager', color: '#10715F', parent: 'Surprise' },
+  { id: 32, value: 40/7, label: 'Perplexed', color: '#10715F', parent: 'Surprise' },
+  { id: 33, value: 40/7, label: 'Astonished', color: '#10715F', parent: 'Surprise' },
+  { id: 34, value: 8, label: 'Helpless', color: '#5F3374', parent: 'Fear' },
+  { id: 35, value: 8, label: 'Worried', color: '#5F3374', parent: 'Fear' },
+  { id: 36, value: 8, label: 'Exposed', color: '#5F3374', parent: 'Fear' },
+  { id: 37, value: 8, label: 'Worthless', color: '#5F3374', parent: 'Fear' },
+  { id: 38, value: 8, label: 'Excluded', color: '#5F3374', parent: 'Fear' },
+  { id: 39, value: 8, label: 'Busy', color: '#8F5417', parent: 'Bad' },
+  { id: 40, value: 8, label: 'Horrified', color: '#8F5417', parent: 'Bad' },
+  { id: 41, value: 8, label: 'Judgmental', color: '#8F5417', parent: 'Bad' },
+  { id: 42, value: 8, label: 'Hesitant', color: '#8F5417', parent: 'Bad' },
+  { id: 43, value: 8, label: 'Overwhelmed', color: '#8F5417', parent: 'Bad' }
 ];
+
+const allData = [...data1, ...data2, ...data3];
 
 const sizing = {
   margin: { right: 5 },
@@ -103,8 +105,36 @@ const getArcLabel = (params) => {
 };
 
 const EmotionWheel = () => {
+  const [hoveredParent, setHoveredParent] = useState(null);
+  const [highlightedItem, setHighlightedItem] = useState(null);
+
+  const handleMouseEnter = (data) => {
+    console.log(data);
+    setHoveredParent(data.parent || data.label);
+  };
+
+  const handleMouseLeave = () => {
+    setHoveredParent(null);
+  }
+
+  const applyOpacity = (slice) => {
+    if (!hoveredParent) return 1;
+    return slice.parent === hoveredParent || slice.label === hoveredParent ? 1 : 0.4;
+  };
+
+  const renderSeries = (id, data, innerRadius, outerRadius, arcLabel) => (
+    {
+      id,
+      data: data.map((item) => ({ ...item, opacity: applyOpacity(item) })),
+      innerRadius,
+      outerRadius,
+      arcLabel,
+      highlightScope: { faded: 'global', highlighted: 'item' }
+    }
+  );
+
   const handleClick = (event, params) => {
-    console.log(params.seriesId);
+    //console.log(params.seriesId);
     const allData = {
       data1,
       data2,
@@ -117,6 +147,25 @@ const EmotionWheel = () => {
     }
 
   };
+
+  const handleHighlightChange = (event) => {
+    console.log(event);
+
+    if (event) {
+      const allData = {
+        data1,
+        data2,
+        data3,
+      };
+
+      const clickedItem = allData[`data${event.seriesId}`].find(item => item.id === event.dataIndex);
+      if (clickedItem) {
+        //zalert(`You hovered on ${clickedItem.label}`);
+      }
+      setHighlightedItem(clickedItem);
+    }
+
+  };
   
   return (
     <Stack alignItems="center" justifyContent="center" sx={{ height: '100vh', bgcolor: '#f8f9fa' }}>
@@ -124,29 +173,9 @@ const EmotionWheel = () => {
       <Box sx={{ width: 800, height: 800 }}>
         <PieChart
           series={[
-            {
-              id: '1',
-              data: data1,
-              outerRadius: 120,
-              arcLabel: getArcLabel,
-              highlightScope: { fade: 'series', highlight: 'item' },
-            },
-            {
-              id: '2',
-              data: data2,
-              innerRadius: 120,
-              outerRadius: 240,
-              arcLabel: getArcLabel,
-              highlightScope: { fade: 'series', highlight: 'item' },
-            },
-            {
-              id: '3',
-              data: data3,
-              innerRadius: 240,
-              outerRadius: 360,
-              arcLabel: getArcLabel,
-              highlightScope: { fade: 'series', highlight: 'item' },
-            },
+            renderSeries(1, data1, 0, 120, getArcLabel),
+            renderSeries(2, data2, 120, 240, getArcLabel),
+            renderSeries(3, data3, 240, 360, getArcLabel),
           ]}
           sx={{
             [`& .${pieArcLabelClasses.root}`]: {
@@ -157,6 +186,8 @@ const EmotionWheel = () => {
           tooltip={{ trigger: 'none' }}
           {...sizing}
           onItemClick={handleClick}
+          highlightedItem={{ seriesId: 3, dataIndex: 0 }}
+          onHighlightChange={handleHighlightChange}
         />
       </Box>
     </Stack>
